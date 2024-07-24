@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Prediction</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script>
+        function validateForm() {
+            let location = document.getElementById('location').value;
+            let areaType = document.getElementById('area_type').value;
+            let bhk = document.getElementById('bhk').value;
+            let bath = document.getElementById('bath').value;
+            let balcony = document.getElementById('balcony').value;
+            let sqft = document.getElementById('sqft').value;
+
+            if (location == "" || areaType == "" || bhk == "" || bath == "" || balcony == "" || sqft == "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            if (bhk <= 0 || bath <= 0 || balcony < 0 || sqft <= 0) {
+                alert("Please enter valid positive numbers for BHK, Bathrooms, Balcony, and Square Feet");
+                return false;
+            }
+
+            return true;
+        }
+
+        function form_handler(event) {
+            event.preventDefault();
+            if (validateForm()) {
+                send_data();
+            }
+        }
+
+        function send_data() {
+            var fd = new FormData(document.querySelector('form'));
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/predict', true);
+            document.getElementById("prediction").innerHTML = "Wait Predicting Price!....";
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    var predictionValue = parseFloat(xhr.responseText).toLocaleString('en-IN', {
+                        style: 'currency',
+                        currency: 'INR'
+                    });
+                    document.getElementById('prediction').innerHTML = "Predicted Price: " + predictionValue;
+                }
+            };
+            xhr.send(fd);
+        }
+    </script>
+
+    <style>
+        body {
+            display: flex;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label{
+            margin: 0;
+        }
+
+        #prediction {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <img src="https://www.homelane.com/blog/wp-content/uploads/2022/11/american-house.jpg" style="max-width: 158%; max-height: auto; ">
+    </div>
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-6 box">
+                <h2 class="mt-5">House Price Prediction</h2>
+                <form id="predictionForm" class="mt-4" onsubmit="form_handler(event)">
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <select id="location" name="location" class="form-control" required>
+                            {% for loc in locations %}
+                                <option value="{{ loc }}">{{ loc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="area_type">Area Type</label>
+                        <select id="area_type" name="area_type" class="form-control" required>
+                            {% for area in area_types %}
+                                <option value="{{ area }}">{{ area }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="bhk">BHK</label>
+                        <input type="number" id="bhk" name="bhk" class="form-control" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="bath">Number of Bathrooms</label>
+                        <input type="number" id="bath" name="bath" class="form-control" required min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="balcony">Number of Balcony</label>
+                        <input type="number" id="balcony" name="balcony" class="form-control" required min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="sqft">Total Square Feet</label>
+                        <input type="number" step="0.01" id="sqft" name="sqft" class="form-control" required min="1">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Predict Price</button>
+                </form>
+                <h4 class="mt-5" id="prediction"></h4>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
