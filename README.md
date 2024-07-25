@@ -12,54 +12,58 @@ This project involves building a machine learning model to predict house prices 
 - [Web Application](#web-application)
 - [Installation](#installation)
 - [Usage](#usage)
+- [Directory Structure](#directory-structure)
+- [Future Work](#future-work)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Project Overview
 
-The objective of this project is to build a predictive model for house prices in Bengaluru. We use various regression algorithms to predict the prices and evaluate their performance.
+The objective of this project is to build a predictive model for house prices in Bengaluru. We use various regression algorithms to predict the prices and evaluate their performance. Additionally, a Flask web application is developed to provide an interactive interface for users to input house features and get price predictions.
 
 ## Dataset
 
 The dataset used in this project is `Bengaluru_House_Data.csv`. It contains the following columns:
 
-- `area_type`
-- `availability`
-- `location`
-- `size`
-- `society`
-- `total_sqft`
-- `bath`
-- `balcony`
-- `price`
+- `area_type`: Type of the area (e.g., Super built-up Area, Built-up Area, Plot Area, Carpet Area)
+- `availability`: When the property is available (e.g., Ready To Move, Immediate Possession)
+- `location`: Location of the property
+- `size`: Number of bedrooms (BHK)
+- `society`: Name of the society
+- `total_sqft`: Total area in square feet
+- `bath`: Number of bathrooms
+- `balcony`: Number of balconies
+- `price`: Price of the property in lakhs
 
 ## Preprocessing and EDA
 
 The data preprocessing and Exploratory Data Analysis (EDA) steps include:
 
-- Handling missing values
-- Converting categorical data to numerical data
-- Removing outliers
-- Feature engineering (e.g., creating `price_per_sqft`)
-- Data visualization to understand the distribution and relationships of features
+- **Handling Missing Values**: Filling missing values with appropriate measures (e.g., median, mode).
+- **Converting Categorical Data to Numerical Data**: Using one-hot encoding for categorical features.
+- **Removing Outliers**: Identifying and removing outliers based on domain knowledge and statistical methods.
+- **Feature Engineering**: Creating new features such as `price_per_sqft` for better model performance.
+- **Data Visualization**: Using various plots (e.g., histograms, bar plots, scatter plots) to understand the distribution and relationships of features.
 
 ## Model Training
 
 We train the following models on the preprocessed data:
 
-1. Linear Regression
-2. Lasso Regression
-3. Ridge Regression
-4. Random Forest Regression
+1. **Linear Regression**
+2. **Lasso Regression**
+3. **Ridge Regression**
+4. **Random Forest Regression**
+
+The models are evaluated using a pipeline that includes preprocessing steps like scaling and one-hot encoding.
 
 ## Evaluation
 
 The performance of the models is evaluated using the following metrics:
 
-- Mean Absolute Error (MAE)
-- Mean Squared Error (MSE)
-- Root Mean Squared Error (RMSE)
-- R-squared (R2)
+- **Mean Absolute Error (MAE)**
+- **Mean Squared Error (MSE)**
+- **Root Mean Squared Error (RMSE)**
+- **R-squared (R2)**
 
 ### Model Performance
 
