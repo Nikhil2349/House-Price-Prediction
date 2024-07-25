@@ -4,11 +4,11 @@ import numpy as np
 import pickle
 
 # Initialize the Flask application
-app = Flask(__name__, template_folder=r'C:\Users\Nikhil G\Documents\Projects\House price prediction\templates')
+app = Flask(__name__)  # Default template_folder is 'templates'
 
 # Load the data and model
-data = pd.read_csv('cleaned_datset.csv')
-pipe = pickle.load(open('model.pkl', 'rb'))
+data = pd.read_csv('cleaned_datset.csv')  # Ensure this file is in the correct location
+pipe = pickle.load(open('model.pkl', 'rb'))  # Ensure this file is in the correct location
 
 @app.route('/')
 def index():
