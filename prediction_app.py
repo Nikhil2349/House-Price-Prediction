@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 
 # Initialize the Flask application
-app = Flask(__name__)  # Default template_folder is 'templates'
+app = Flask(__name__, template_folder='templates')
 
 # Load the data and model
 data = pd.read_csv('cleaned_datset.csv')  # Ensure this file is in the correct location
@@ -31,7 +31,7 @@ def predict():
     balcony = request.form.get('balcony')
     sqft = request.form.get('sqft')
 
-    print(location, bhk, bath, sqft)
+    print(location,area_type, bhk, bath, sqft)
     
     # Create input data for the model
     input_data = pd.DataFrame([[location, area_type, float(bhk), float(bath), float(balcony), float(sqft)]], 
