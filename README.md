@@ -47,6 +47,9 @@ The data preprocessing and Exploratory Data Analysis (EDA) steps include:
 
 ## Model Training
 
+![Alt text](https://miro.medium.com/v2/resize:fit:1400/1*AYglWbRIuKfBITlkSZj1vg.png)
+
+
 We train the following models on the preprocessed data:
 
 1. **Linear Regression**
@@ -66,6 +69,9 @@ The performance of the models is evaluated using the following metrics:
 - **R-squared (R2)**
 
 ### Model Performance
+
+![Alt text](https://miro.medium.com/v2/resize:fit:1400/1*8VS1JyET8wKdsNG6fMlpTA.png)
+
 
 | Model                   | R2 Score | MAE       |
 |-------------------------|----------|-----------|
